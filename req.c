@@ -9,7 +9,7 @@
 
 int main(void) {
 
-    zsock_t *req = zsock_new_req("tcp://127.0.0.1:5001");
+    zsock_t *req = zsock_new_req("tcp://127.0.0.1:5000");
 
     if (req == NULL){
         printf("Ошибка создания");
@@ -17,7 +17,7 @@ int main(void) {
     }
 
     for (int i = 1; i <= 10; i++){
-        int check_send = zstr_send(req, "hui");
+        int check_send = zstr_send(req, "Hello, REP");
         if (check_send == -1){
             printf("Ошибка отправки");
             return -1;

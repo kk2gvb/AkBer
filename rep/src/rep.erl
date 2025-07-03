@@ -1,15 +1,18 @@
 -module(rep).
--export([main/0]).
+-export([main/0, loop/2]).
 
 main() ->
-    %FileName = "/tmp/AkBer.sock",
-    %AbstractPath = <<0, (list_to_binary(FileName))/binary>>,
     application:start(chumak),
     {ok, Sock} = chumak:socket(rep),
-    {ok, _} = chumak:bind(Sock, tcp, "0.0.0.0", 5001),
-    loop(Sock).
+    {ok, _} = chumak:bind(Sock, tcp, "0.0.0.0", 5000),
+    loop(Sock, 10),
+    gen_server:stop(Sock).
 
-loop(Sock) ->
-    {ok, _Message} = chumak:recv(Sock),
-    chumak:send(Sock, <<"Huy">>),
-    loop(Sock).
+loop(_, 0) ->
+    ok;
+
+loop(Sock, Count) when Count > 0 ->
+    {ok, Message} = chumak:recv(Sock),
+    io:format("Полученно сообщение: ~p~n", [Message]),
+    chumak:send(Sock, <<"Hello, REQ">>),
+    loop(Sock, Count - 1).
