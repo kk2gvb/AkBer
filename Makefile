@@ -6,7 +6,7 @@ deps: libzmq czmq rebar3 chumak
 
 # Сборка libzmq из исходников
 libzmq:
-	cd deps/libzmq && ./autogen.sh && ./configure --prefix=$(PWD)/deps/libzmq/install --with-libsodium CFLAGS="-fPIC" && make && make install
+	sudo pacman -S --noconfirm libsodium && cd deps/libzmq && ./autogen.sh && ./configure --prefix=$(PWD)/deps/libzmq/install --with-libsodium CFLAGS="-fPIC" && make && make install
 
 # Сборка czmq из исходников
 czmq:
