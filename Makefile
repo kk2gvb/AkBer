@@ -26,7 +26,7 @@ erlang:
 
 # Сборка C-программы req
 req:
-	gcc -o req req.c -Ideps/czmq/install/include -Ideps/libzmq/install/include -Ldeps/czmq/install/lib -Ldeps/libzmq/install/lib -lczmq -lzmq
+    	gcc -o req req.c -Ideps/czmq/install/include -Ideps/libzmq/install/include -Ldeps/czmq/install/lib -Ldeps/libzmq/install/lib -lzmq -lczmq -pthread
 
 # Запуск C-программы req
 run-req:
